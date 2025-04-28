@@ -1,0 +1,1216 @@
+{
+  "contractName": "LandModifiers",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "verifiers",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"verifiers\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/LandModifiers.sol\":\"LandModifiers\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"project:/contracts/LandModifiers.sol\":{\"keccak256\":\"0x2f0aa968383727239a9d3e23db3532f049a5bd995257f7590d2a64e753ed9f1e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://52f48ab6633395324630bb977040b99b9e4d61e81bb5c63c403952a6fd24a39c\",\"dweb:/ipfs/QmerEApGCrwuXypCz7GsLVCML9hpUV8x1Xo3BR3aGscCYU\"]},\"project:/contracts/LandStructs.sol\":{\"keccak256\":\"0xc80743c097f0ba196994ba47b8671f365b527dd6e43335fcc88af9bda3e0c99d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19381728ac34ce871788001502a4f862a2efc594542a3882213a96c0b5002021\",\"dweb:/ipfs/QmS7aHSfXkZtTsLpyevqfFNXw6uY7kTKdD3SDi3MnxB7AL\"]}},\"version\":1}",
+  "bytecode": "0x60808060405234601457609d90816100198239f35b5f80fdfe60808060405260043610156011575f80fd5b5f90813560e01c636c824487146025575f80fd5b3460635760203660031901126063576004356001600160a01b03811690819003605f5760408360ff92602095526001855220541615158152f35b8280fd5b5080fdfea264697066735822122091bf714fb8a1a5c6e62cc86a1375fdbb5f55a21c0958e123557e8beead9254e264736f6c63430008140033",
+  "deployedBytecode": "0x60808060405260043610156011575f80fd5b5f90813560e01c636c824487146025575f80fd5b3460635760203660031901126063576004356001600160a01b03811690819003605f5760408360ff92602095526001855220541615158152f35b8280fd5b5080fdfea264697066735822122091bf714fb8a1a5c6e62cc86a1375fdbb5f55a21c0958e123557e8beead9254e264736f6c63430008140033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "92:818:0:-:0;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "92:818:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;92:818:0;;;;;;-1:-1:-1;;;;;92:818:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\nimport \"./LandStructs.sol\";\r\n\r\ncontract LandModifiers {\r\n    mapping(uint256 => Land) internal lands;\r\n    mapping(address => bool) public verifiers;\r\n\r\n    modifier onlyOwner(uint256 _landId) {\r\n        bool isOwner = false;\r\n        for(uint i = 0; i < lands[_landId].owners.length; i++) {\r\n            if(lands[_landId].owners[i] == msg.sender) {\r\n                isOwner = true;\r\n                break;\r\n            }\r\n        }\r\n        require(isOwner, \"Not land owner\");\r\n        _;\r\n    }\r\n\r\n    modifier onlyVerifier() {\r\n        require(verifiers[msg.sender], \"Not authorized verifier\");\r\n        _;\r\n    }\r\n\r\n    function _initializeVerifier(address _verifier) internal {\r\n        verifiers[_verifier] = true;\r\n    }\r\n\r\n    function _getLand(uint256 _landId) internal view returns (Land memory) {\r\n        return lands[_landId];\r\n    }\r\n} ",
+  "sourcePath": "C:\\Users\\ankit\\Desktop\\SEM-6\\BC\\Land Registration\\contracts\\LandModifiers.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/LandModifiers.sol",
+    "exportedSymbols": {
+      "Dispute": [
+        1002
+      ],
+      "Land": [
+        987
+      ],
+      "LandModifiers": [
+        96
+      ],
+      "OwnershipHistory": [
+        1009
+      ]
+    },
+    "id": 97,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".20"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:24:0"
+      },
+      {
+        "absolutePath": "project:/contracts/LandStructs.sol",
+        "file": "./LandStructs.sol",
+        "id": 2,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 97,
+        "sourceUnit": 1010,
+        "src": "61:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "LandModifiers",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 96,
+        "linearizedBaseContracts": [
+          96
+        ],
+        "name": "LandModifiers",
+        "nameLocation": "101:13:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 7,
+            "mutability": "mutable",
+            "name": "lands",
+            "nameLocation": "156:5:0",
+            "nodeType": "VariableDeclaration",
+            "scope": 96,
+            "src": "122:39:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$987_storage_$",
+              "typeString": "mapping(uint256 => struct Land)"
+            },
+            "typeName": {
+              "id": 6,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 3,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "130:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "122:24:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$987_storage_$",
+                "typeString": "mapping(uint256 => struct Land)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 5,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 4,
+                  "name": "Land",
+                  "nameLocations": [
+                    "141:4:0"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 987,
+                  "src": "141:4:0"
+                },
+                "referencedDeclaration": 987,
+                "src": "141:4:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Land_$987_storage_ptr",
+                  "typeString": "struct Land"
+                }
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "functionSelector": "6c824487",
+            "id": 11,
+            "mutability": "mutable",
+            "name": "verifiers",
+            "nameLocation": "200:9:0",
+            "nodeType": "VariableDeclaration",
+            "scope": 96,
+            "src": "168:41:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+              "typeString": "mapping(address => bool)"
+            },
+            "typeName": {
+              "id": 10,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 8,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "176:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "168:24:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                "typeString": "mapping(address => bool)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 9,
+                "name": "bool",
+                "nodeType": "ElementaryTypeName",
+                "src": "187:4:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 57,
+              "nodeType": "Block",
+              "src": "254:303:0",
+              "statements": [
+                {
+                  "assignments": [
+                    16
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 16,
+                      "mutability": "mutable",
+                      "name": "isOwner",
+                      "nameLocation": "270:7:0",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 57,
+                      "src": "265:12:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 15,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "265:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 18,
+                  "initialValue": {
+                    "hexValue": "66616c7365",
+                    "id": 17,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "280:5:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "false"
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "265:20:0"
+                },
+                {
+                  "body": {
+                    "id": 49,
+                    "nodeType": "Block",
+                    "src": "351:142:0",
+                    "statements": [
+                      {
+                        "condition": {
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 41,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "baseExpression": {
+                              "expression": {
+                                "baseExpression": {
+                                  "id": 33,
+                                  "name": "lands",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 7,
+                                  "src": "369:5:0",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$987_storage_$",
+                                    "typeString": "mapping(uint256 => struct Land storage ref)"
+                                  }
+                                },
+                                "id": 35,
+                                "indexExpression": {
+                                  "id": 34,
+                                  "name": "_landId",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 13,
+                                  "src": "375:7:0",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  }
+                                },
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "nodeType": "IndexAccess",
+                                "src": "369:14:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_struct$_Land_$987_storage",
+                                  "typeString": "struct Land storage ref"
+                                }
+                              },
+                              "id": 36,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "384:6:0",
+                              "memberName": "owners",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 967,
+                              "src": "369:21:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_array$_t_address_$dyn_storage",
+                                "typeString": "address[] storage ref"
+                              }
+                            },
+                            "id": 38,
+                            "indexExpression": {
+                              "id": 37,
+                              "name": "i",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 20,
+                              "src": "391:1:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "IndexAccess",
+                            "src": "369:24:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "expression": {
+                              "id": 39,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4294967281,
+                              "src": "397:3:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 40,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "401:6:0",
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "src": "397:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "src": "369:38:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "id": 48,
+                        "nodeType": "IfStatement",
+                        "src": "366:116:0",
+                        "trueBody": {
+                          "id": 47,
+                          "nodeType": "Block",
+                          "src": "409:73:0",
+                          "statements": [
+                            {
+                              "expression": {
+                                "id": 44,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "leftHandSide": {
+                                  "id": 42,
+                                  "name": "isOwner",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 16,
+                                  "src": "428:7:0",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_bool",
+                                    "typeString": "bool"
+                                  }
+                                },
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "rightHandSide": {
+                                  "hexValue": "74727565",
+                                  "id": 43,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "kind": "bool",
+                                  "lValueRequested": false,
+                                  "nodeType": "Literal",
+                                  "src": "438:4:0",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_bool",
+                                    "typeString": "bool"
+                                  },
+                                  "value": "true"
+                                },
+                                "src": "428:14:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              },
+                              "id": 45,
+                              "nodeType": "ExpressionStatement",
+                              "src": "428:14:0"
+                            },
+                            {
+                              "id": 46,
+                              "nodeType": "Break",
+                              "src": "461:5:0"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 29,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 23,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20,
+                      "src": "312:1:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "expression": {
+                        "expression": {
+                          "baseExpression": {
+                            "id": 24,
+                            "name": "lands",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 7,
+                            "src": "316:5:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$987_storage_$",
+                              "typeString": "mapping(uint256 => struct Land storage ref)"
+                            }
+                          },
+                          "id": 26,
+                          "indexExpression": {
+                            "id": 25,
+                            "name": "_landId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 13,
+                            "src": "322:7:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "316:14:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Land_$987_storage",
+                            "typeString": "struct Land storage ref"
+                          }
+                        },
+                        "id": 27,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "331:6:0",
+                        "memberName": "owners",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 967,
+                        "src": "316:21:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_address_$dyn_storage",
+                          "typeString": "address[] storage ref"
+                        }
+                      },
+                      "id": 28,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "338:6:0",
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "src": "316:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "312:32:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 50,
+                  "initializationExpression": {
+                    "assignments": [
+                      20
+                    ],
+                    "declarations": [
+                      {
+                        "constant": false,
+                        "id": 20,
+                        "mutability": "mutable",
+                        "name": "i",
+                        "nameLocation": "305:1:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 50,
+                        "src": "300:6:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 19,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "300:4:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "visibility": "internal"
+                      }
+                    ],
+                    "id": 22,
+                    "initialValue": {
+                      "hexValue": "30",
+                      "id": 21,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "309:1:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "nodeType": "VariableDeclarationStatement",
+                    "src": "300:10:0"
+                  },
+                  "loopExpression": {
+                    "expression": {
+                      "id": 31,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "++",
+                      "prefix": false,
+                      "src": "346:3:0",
+                      "subExpression": {
+                        "id": 30,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20,
+                        "src": "346:1:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 32,
+                    "nodeType": "ExpressionStatement",
+                    "src": "346:3:0"
+                  },
+                  "nodeType": "ForStatement",
+                  "src": "296:197:0"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 52,
+                        "name": "isOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16,
+                        "src": "511:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "4e6f74206c616e64206f776e6572",
+                        "id": 53,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "520:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c7368a6f052afdb21766fe3dda60ea4193c1fefbeea36fdf4ee786683e04662e",
+                          "typeString": "literal_string \"Not land owner\""
+                        },
+                        "value": "Not land owner"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c7368a6f052afdb21766fe3dda60ea4193c1fefbeea36fdf4ee786683e04662e",
+                          "typeString": "literal_string \"Not land owner\""
+                        }
+                      ],
+                      "id": 51,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "503:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 54,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "503:34:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 55,
+                  "nodeType": "ExpressionStatement",
+                  "src": "503:34:0"
+                },
+                {
+                  "id": 56,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "548:1:0"
+                }
+              ]
+            },
+            "id": 58,
+            "name": "onlyOwner",
+            "nameLocation": "227:9:0",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 14,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13,
+                  "mutability": "mutable",
+                  "name": "_landId",
+                  "nameLocation": "245:7:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 58,
+                  "src": "237:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "237:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "236:17:0"
+            },
+            "src": "218:339:0",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 69,
+              "nodeType": "Block",
+              "src": "589:88:0",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "baseExpression": {
+                          "id": 61,
+                          "name": "verifiers",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11,
+                          "src": "608:9:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                            "typeString": "mapping(address => bool)"
+                          }
+                        },
+                        "id": 64,
+                        "indexExpression": {
+                          "expression": {
+                            "id": 62,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4294967281,
+                            "src": "618:3:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 63,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "622:6:0",
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "src": "618:10:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "608:21:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "4e6f7420617574686f72697a6564207665726966696572",
+                        "id": 65,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "631:25:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_6877bacf5e276699c90369ff1537d27233786bc19d05c289e945b8e158ebe793",
+                          "typeString": "literal_string \"Not authorized verifier\""
+                        },
+                        "value": "Not authorized verifier"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_6877bacf5e276699c90369ff1537d27233786bc19d05c289e945b8e158ebe793",
+                          "typeString": "literal_string \"Not authorized verifier\""
+                        }
+                      ],
+                      "id": 60,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "600:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 66,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "600:57:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 67,
+                  "nodeType": "ExpressionStatement",
+                  "src": "600:57:0"
+                },
+                {
+                  "id": 68,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "668:1:0"
+                }
+              ]
+            },
+            "id": 70,
+            "name": "onlyVerifier",
+            "nameLocation": "574:12:0",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 59,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "586:2:0"
+            },
+            "src": "565:112:0",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 81,
+              "nodeType": "Block",
+              "src": "742:46:0",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 79,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "id": 75,
+                        "name": "verifiers",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11,
+                        "src": "753:9:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                          "typeString": "mapping(address => bool)"
+                        }
+                      },
+                      "id": 77,
+                      "indexExpression": {
+                        "id": 76,
+                        "name": "_verifier",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 72,
+                        "src": "763:9:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "753:20:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "hexValue": "74727565",
+                      "id": 78,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "776:4:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "753:27:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 80,
+                  "nodeType": "ExpressionStatement",
+                  "src": "753:27:0"
+                }
+              ]
+            },
+            "id": 82,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_initializeVerifier",
+            "nameLocation": "694:19:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 73,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 72,
+                  "mutability": "mutable",
+                  "name": "_verifier",
+                  "nameLocation": "722:9:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "714:17:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 71,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "714:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "713:19:0"
+            },
+            "returnParameters": {
+              "id": 74,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "742:0:0"
+            },
+            "scope": 96,
+            "src": "685:103:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 94,
+              "nodeType": "Block",
+              "src": "867:40:0",
+              "statements": [
+                {
+                  "expression": {
+                    "baseExpression": {
+                      "id": 90,
+                      "name": "lands",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7,
+                      "src": "885:5:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$987_storage_$",
+                        "typeString": "mapping(uint256 => struct Land storage ref)"
+                      }
+                    },
+                    "id": 92,
+                    "indexExpression": {
+                      "id": 91,
+                      "name": "_landId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 84,
+                      "src": "891:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "885:14:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Land_$987_storage",
+                      "typeString": "struct Land storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 89,
+                  "id": 93,
+                  "nodeType": "Return",
+                  "src": "878:21:0"
+                }
+              ]
+            },
+            "id": 95,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_getLand",
+            "nameLocation": "805:8:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 85,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 84,
+                  "mutability": "mutable",
+                  "name": "_landId",
+                  "nameLocation": "822:7:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "814:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "814:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "813:17:0"
+            },
+            "returnParameters": {
+              "id": 89,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "854:11:0",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Land_$987_memory_ptr",
+                    "typeString": "struct Land"
+                  },
+                  "typeName": {
+                    "id": 87,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 86,
+                      "name": "Land",
+                      "nameLocations": [
+                        "854:4:0"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 987,
+                      "src": "854:4:0"
+                    },
+                    "referencedDeclaration": 987,
+                    "src": "854:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Land_$987_storage_ptr",
+                      "typeString": "struct Land"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "853:13:0"
+            },
+            "scope": 96,
+            "src": "796:111:0",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 97,
+        "src": "92:818:0",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "33:878:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.20+commit.a1b79de6.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2025-04-27T02:56:10.894Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

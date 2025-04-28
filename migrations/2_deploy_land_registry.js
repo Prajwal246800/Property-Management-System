@@ -1,5 +1,8 @@
-const LandRegistry = artifacts.require("LandRegistry");
+const PropertyRegistry = artifacts.require("PropertyRegistry");
+const PropertyModifiers = artifacts.require("PropertyModifiers");
 
-module.exports = function (deployer) {
-  deployer.deploy(LandRegistry);
+module.exports = async function (deployer) {
+  await deployer.deploy(PropertyRegistry);
+  const registry = await PropertyRegistry.deployed();
+  console.log("PropertyRegistry deployed at:", registry.address);
 };

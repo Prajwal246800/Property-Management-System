@@ -1,32 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <title>Land Registry DApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Registry</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>🏡 Land Registry</h1>
-    <button onclick="connectWallet()">🔌 Connect Wallet</button>
-    <div class="form">
-      <h2>Register New Land</h2>
-      <input type="text" id="location" placeholder="Location" />
-      <input type="number" id="area" placeholder="Area (sqft)" />
-      <button onclick="registerLand()">Register Land</button>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1><i class="fas fa-building"></i></h1>
     </div>
-    <div class="form">
-      <h2>Transfer Land</h2>
-      <input type="number" id="landIdTransfer" placeholder="Land ID" />
-      <input type="text" id="newOwner" placeholder="New Owner Address" />
-      <button onclick="transferLand()">Transfer</button>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item" data-section="register">
+        <i class="fas fa-plus-circle"></i>
+        Register Property
+      </a>
+      <a href="#" class="nav-item" data-section="manage">
+        <i class="fas fa-cogs"></i>
+        Manage Property
+      </a>
+      <a href="#" class="nav-item" data-section="combined">
+        <i class="fas fa-search"></i>
+        Property Information
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <button class="theme-toggle" onclick="toggleTheme()">
+          <i class="fas fa-sun"></i>
+        </button>
+      </div>
+      <div class="header-title-container">
+        <h1 class="header-title">Property Ownership Management</h1>
+      </div>
+      <div class="header-right">
+        <div id="wallet-status" class="status-badge">
+          <i class="fas fa-wallet"></i>
+          <span>Wallet not connected</span>
+        </div>
+        <div id="contract-status" class="status-badge">
+          <i class="fas fa-code"></i>
+          <span>Contract not connected</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Grid -->
+    <div class="content-grid">
+      <!-- Register Property Section -->
+      <section id="register" class="section active">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-plus-circle"></i> Register New Property</h2>
+          </div>
+          <div class="form-layout">
+            <div class="form-section">
+              <div class="form-group">
+                <label for="ownerAddress">Owner Address</label>
+                <input type="text" id="ownerAddress" placeholder="Enter owner's wallet address">
+                
+                <label for="propertyType">Property Type</label>
+                <select id="propertyType">
+                  <option value="House">House</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Commercial">Commercial</option>
+                </select>
+                
+                <label for="address">Address</label>
+                <input type="text" id="address" placeholder="Enter property address">
+                
+                <label for="size">Size (sqft)</label>
+                <input type="number" id="size" placeholder="Enter property size">
+                
+                <label for="bedrooms">Number of Bedrooms</label>
+                <input type="number" id="bedrooms" placeholder="Enter number of bedrooms">
+                
+                <label for="bathrooms">Number of Bathrooms</label>
+                <input type="number" id="bathrooms" placeholder="Enter number of bathrooms">
+                
+                <label for="constructionYear">Construction Year</label>
+                <input type="number" id="constructionYear" placeholder="Enter construction year">
+                
+                <label for="amenities">Amenities (comma separated)</label>
+                <input type="text" id="amenities" placeholder="e.g., Pool, Gym, Parking">
+                
+                <div class="action-buttons">
+                  <button onclick="registerProperty()">
+                    <i class="fas fa-save"></i>
+                    Register Property
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Manage Property Section -->
+      <section id="manage" class="section">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-cogs"></i> Manage Property</h2>
+          </div>
+          <div class="form-layout">
+            <div class="form-section">
+              <div class="form-group">
+                <label for="propertyId">Property ID</label>
+                <input type="number" id="propertyId" placeholder="Enter property ID">
+                
+                <label for="valuation">New Valuation</label>
+                <input type="number" id="valuation" placeholder="Enter new valuation">
+                
+                <label for="price">Sale Price</label>
+                <input type="number" id="price" placeholder="Enter sale price">
+                
+                <label for="documentHash">Document Hash</label>
+                <input type="text" id="documentHash" placeholder="Enter document hash">
+                
+                <div class="action-buttons">
+                  <button onclick="updateValuation()">
+                    <i class="fas fa-dollar-sign"></i>
+                    Update Valuation
+                  </button>
+                  <button onclick="setForSale()">
+                    <i class="fas fa-tag"></i>
+                    Set For Sale
+                  </button>
+                  <button onclick="revertSaleStatus()">
+                    <i class="fas fa-undo"></i>
+                    Revert Sale Status
+                  </button>
+                  <button onclick="addDocument()">
+                    <i class="fas fa-file-upload"></i>
+                    Add Document
+                  </button>
+                  <button onclick="removeDocument()">
+                    <i class="fas fa-file-export"></i>
+                    Remove Document
+                  </button>
+                  <button onclick="verifyProperty()">
+                    <i class="fas fa-check-circle"></i>
+                    Verify Property
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Combined Section -->
+      <section id="combined" class="section">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-info-circle"></i> Property Information</h2>
+          </div>
+          <div class="form-layout">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+              <button class="tab-button active" data-tab="search">
+                <i class="fas fa-search"></i> Search
+              </button>
+              <button class="tab-button" data-tab="details">
+                <i class="fas fa-info-circle"></i> Details
+              </button>
+              <button class="tab-button" data-tab="history">
+                <i class="fas fa-history"></i> History
+              </button>
+              <button class="tab-button" data-tab="disputes">
+                <i class="fas fa-exclamation-triangle"></i> Disputes
+              </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content active" id="search-content">
+              <div class="form-section">
+                <div class="form-group">
+                  <label for="searchOwner">Owner Address</label>
+                  <div class="flex items-center gap-4">
+                    <input type="text" id="searchOwner" placeholder="Enter owner's wallet address">
+                    <button onclick="searchPropertiesByOwner()">
+                      <i class="fas fa-search"></i>
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="searchResults" class="mt-4"></div>
+            </div>
+
+            <div class="tab-content" id="details-content">
+              <div id="propertyDetails"></div>
+            </div>
+
+            <div class="tab-content" id="history-content">
+              <div id="propertyHistory"></div>
+            </div>
+
+            <div class="tab-content" id="disputes-content">
+              <div id="propertyDisputes"></div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-    <div>
-      <h2>My Registered Lands</h2>
-      <ul id="landList"></ul>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.10.0/dist/web3.min.js"></script>
-  <script src="./app.js"></script>
+  </main>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeToggle = document.querySelector('.theme-toggle i');
+      
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        themeToggle.classList.remove('fa-sun');
+        themeToggle.classList.add('fa-moon');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        themeToggle.classList.remove('fa-moon');
+        themeToggle.classList.add('fa-sun');
+      }
+    }
+
+    // Section and tab functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      const sections = document.querySelectorAll('.section');
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      // Section visibility control
+      function showSection(sectionId) {
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+      }
+
+      navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          navItems.forEach(nav => nav.classList.remove('active'));
+          this.classList.add('active');
+          
+          const sectionId = this.getAttribute('data-section');
+          showSection(sectionId);
+        });
+      });
+
+      // Tab functionality
+      function showTab(tabId) {
+        tabContents.forEach(content => content.classList.remove('active'));
+        tabButtons.forEach(button => button.classList.remove('active'));
+        
+        document.getElementById(`${tabId}-content`).classList.add('active');
+        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+      }
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const tabId = this.getAttribute('data-tab');
+          showTab(tabId);
+        });
+      });
+    });
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      document.querySelector('.sidebar').classList.toggle('open');
+    }
+  </script>
+  <script src="app.js"></script>
 </body>
 </html>

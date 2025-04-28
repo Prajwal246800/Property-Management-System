@@ -1,0 +1,632 @@
+{
+  "contractName": "LandStructs",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "lands",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "location",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "area",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "isRegistered",
+          "type": "bool"
+        },
+        {
+          "internalType": "enum LandStructs.Status",
+          "name": "status",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "forSale",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownerToLands",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownershipHistory",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"lands\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"location\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"area\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isRegistered\",\"type\":\"bool\"},{\"internalType\":\"enum LandStructs.Status\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"forSale\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ownerToLands\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ownershipHistory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/LandStructs.sol\":\"LandStructs\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/LandStructs.sol\":{\"keccak256\":\"0x75912014c5b61070f15af4e32cc815a3325a50b5bd58d9b341bfa406bc488b59\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4632393faebf70e72cf2f5347ce05e9765633cdf305276b6264d11c0d3342ec1\",\"dweb:/ipfs/Qmbfv5q5dXGaxWkZsz8mFESJzGEbi8vz5QLXUtCVG9Lw3m\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\nabstract contract LandStructs {\r\n    enum Status { Pending, Approved, Rejected }\r\n\r\n    struct Land {\r\n        uint256 id;\r\n        string location;\r\n        uint256 area;\r\n        address owner;\r\n        bool isRegistered;\r\n        Status status;\r\n        uint256 price;\r\n        bool forSale;\r\n    }\r\n\r\n    mapping(uint256 => Land) public lands;\r\n    mapping(address => uint256[]) public ownerToLands;\r\n    mapping(uint256 => address[]) public ownershipHistory;\r\n}\r\n",
+  "sourcePath": "C:\\Users\\ankit\\Desktop\\SEM-6\\BC\\Land Registration\\contracts\\LandStructs.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/LandStructs.sol",
+    "exportedSymbols": {
+      "LandStructs": [
+        584
+      ]
+    },
+    "id": 585,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 546,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".20"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:24:7"
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "canonicalName": "LandStructs",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 584,
+        "linearizedBaseContracts": [
+          584
+        ],
+        "name": "LandStructs",
+        "nameLocation": "79:11:7",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "LandStructs.Status",
+            "id": 550,
+            "members": [
+              {
+                "id": 547,
+                "name": "Pending",
+                "nameLocation": "112:7:7",
+                "nodeType": "EnumValue",
+                "src": "112:7:7"
+              },
+              {
+                "id": 548,
+                "name": "Approved",
+                "nameLocation": "121:8:7",
+                "nodeType": "EnumValue",
+                "src": "121:8:7"
+              },
+              {
+                "id": 549,
+                "name": "Rejected",
+                "nameLocation": "131:8:7",
+                "nodeType": "EnumValue",
+                "src": "131:8:7"
+              }
+            ],
+            "name": "Status",
+            "nameLocation": "103:6:7",
+            "nodeType": "EnumDefinition",
+            "src": "98:43:7"
+          },
+          {
+            "canonicalName": "LandStructs.Land",
+            "id": 568,
+            "members": [
+              {
+                "constant": false,
+                "id": 552,
+                "mutability": "mutable",
+                "name": "id",
+                "nameLocation": "180:2:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "172:10:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 551,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "172:7:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 554,
+                "mutability": "mutable",
+                "name": "location",
+                "nameLocation": "200:8:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "193:15:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 553,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "193:6:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 556,
+                "mutability": "mutable",
+                "name": "area",
+                "nameLocation": "227:4:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "219:12:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 555,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "219:7:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 558,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "250:5:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "242:13:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 557,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "242:7:7",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 560,
+                "mutability": "mutable",
+                "name": "isRegistered",
+                "nameLocation": "271:12:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "266:17:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 559,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "266:4:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 563,
+                "mutability": "mutable",
+                "name": "status",
+                "nameLocation": "301:6:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "294:13:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_Status_$550",
+                  "typeString": "enum LandStructs.Status"
+                },
+                "typeName": {
+                  "id": 562,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 561,
+                    "name": "Status",
+                    "nameLocations": [
+                      "294:6:7"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 550,
+                    "src": "294:6:7"
+                  },
+                  "referencedDeclaration": 550,
+                  "src": "294:6:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_Status_$550",
+                    "typeString": "enum LandStructs.Status"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 565,
+                "mutability": "mutable",
+                "name": "price",
+                "nameLocation": "326:5:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "318:13:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 564,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "318:7:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 567,
+                "mutability": "mutable",
+                "name": "forSale",
+                "nameLocation": "347:7:7",
+                "nodeType": "VariableDeclaration",
+                "scope": 568,
+                "src": "342:12:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 566,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "342:4:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Land",
+            "nameLocation": "156:4:7",
+            "nodeType": "StructDefinition",
+            "scope": 584,
+            "src": "149:213:7",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "e261f1e5",
+            "id": 573,
+            "mutability": "mutable",
+            "name": "lands",
+            "nameLocation": "402:5:7",
+            "nodeType": "VariableDeclaration",
+            "scope": 584,
+            "src": "370:37:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$568_storage_$",
+              "typeString": "mapping(uint256 => struct LandStructs.Land)"
+            },
+            "typeName": {
+              "id": 572,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 569,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "378:7:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "370:24:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Land_$568_storage_$",
+                "typeString": "mapping(uint256 => struct LandStructs.Land)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 571,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 570,
+                  "name": "Land",
+                  "nameLocations": [
+                    "389:4:7"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 568,
+                  "src": "389:4:7"
+                },
+                "referencedDeclaration": 568,
+                "src": "389:4:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Land_$568_storage_ptr",
+                  "typeString": "struct LandStructs.Land"
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "39577db1",
+            "id": 578,
+            "mutability": "mutable",
+            "name": "ownerToLands",
+            "nameLocation": "451:12:7",
+            "nodeType": "VariableDeclaration",
+            "scope": 584,
+            "src": "414:49:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_uint256_$dyn_storage_$",
+              "typeString": "mapping(address => uint256[])"
+            },
+            "typeName": {
+              "id": 577,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 574,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "422:7:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "414:29:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_uint256_$dyn_storage_$",
+                "typeString": "mapping(address => uint256[])"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "baseType": {
+                  "id": 575,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "433:7:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "id": 576,
+                "nodeType": "ArrayTypeName",
+                "src": "433:9:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "c9cf2adc",
+            "id": 583,
+            "mutability": "mutable",
+            "name": "ownershipHistory",
+            "nameLocation": "507:16:7",
+            "nodeType": "VariableDeclaration",
+            "scope": 584,
+            "src": "470:53:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_address_$dyn_storage_$",
+              "typeString": "mapping(uint256 => address[])"
+            },
+            "typeName": {
+              "id": 582,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 579,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "478:7:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "470:29:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_address_$dyn_storage_$",
+                "typeString": "mapping(uint256 => address[])"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "baseType": {
+                  "id": 580,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "489:7:7",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 581,
+                "nodeType": "ArrayTypeName",
+                "src": "489:9:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                  "typeString": "address[]"
+                }
+              }
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 585,
+        "src": "61:466:7",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "33:496:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2025-04-23T12:48:17.944Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
