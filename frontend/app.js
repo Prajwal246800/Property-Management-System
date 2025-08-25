@@ -2,7 +2,7 @@ let web3;
 let contract;
 let account;
 
-const CONTRACT_ADDRESS = '0x69cf5d2C203aEaaFeEc504540C46f0975f9c74d0';
+const CONTRACT_ADDRESS = '0xb8Ff66ae560C80E44f6Ce274483aB6305c5d038F';
 const walletStatus = document.getElementById('wallet-status');
 const contractStatus = document.getElementById('contract-status');
 
